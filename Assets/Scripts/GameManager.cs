@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
     public int lives = 100;
     public int heads;
     public int tails;
-
+    
+    // save these
+    public int globalWins;
+    public int globalLosses;
 
     public Text winLossText;
     public Text livesText;
     public Text headsTailsText;
     public Text coinSideText;
+    public Text globalStatsText;
     
     public GameObject coinFlipParent;
     public GameObject[] coinFlippers;
@@ -32,11 +36,12 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        SceneManager.sceneLoaded += LoadGame;
+        LoadGame();
         Instance = this;
         DontDestroyOnLoad(gameObject);
         ReplaceLives();
         ReplaceWinLoss();
+        ReplaceGlobalStats();
         CreateCoinFlipper();
         gameOverParent.SetActive(false);
         playingParent.SetActive(true);
@@ -56,7 +61,12 @@ public class GameManager : MonoBehaviour
     {
         headsTailsText.text = $"Heads: {heads}\n Tails: {tails}";
     }
-    
+
+    public void ReplaceGlobalStats()
+    {
+        globalStatsText.text = $"Global stats:\nWins: {globalWins}\nLosses: {globalLosses}";
+    }
+     
     public void ReplaceWinLoss()
     {
         winLossText.text = $"Wins: {wins}\n Losses: {losses}";
@@ -100,22 +110,22 @@ public class GameManager : MonoBehaviour
     {
         string s = "";
         
-        s += wins.ToString() + "|";
-        s += losses.ToString() + "|";
-        s += lives.ToString();
+        s += globalWins.ToString() + "|";
+        s += globalLosses.ToString();
 
+        Debug.Log(s);
         PlayerPrefs.SetString("SaveState", s);
+        PlayerPrefs.Save();
     }
     
-    public void LoadGame(Scene scene, LoadSceneMode mode)
+    public void LoadGame()
     {
         if (!PlayerPrefs.HasKey("SaveState")) return;
 
         string s = PlayerPrefs.GetString("SaveState");
         string[] data = s.Split('|');
 
-        wins = int.Parse(data[0]);
-        losses = int.Parse(data[1]);
-        lives = int.Parse(data[2]);
+        globalWins = int.Parse(data[0]);
+        globalLosses = int.Parse(data[1]);
     }
 }

@@ -72,7 +72,10 @@ public class CoinFlipper : MonoBehaviour
     private void Win()
     {
         GameManager.Instance.wins++;
+        GameManager.Instance.globalWins++;
+        GameManager.Instance.SaveGame();
         GameManager.Instance.ReplaceWinLoss();
+        GameManager.Instance.ReplaceGlobalStats();
         GameManager.Instance.RestartGame();
         GameManager.Instance.lives += 5;
         CheckLife();
@@ -81,7 +84,10 @@ public class CoinFlipper : MonoBehaviour
     private void Lose()
     {
         GameManager.Instance.losses++;
+        GameManager.Instance.globalLosses++;
+        GameManager.Instance.SaveGame();
         GameManager.Instance.ReplaceWinLoss();
+        GameManager.Instance.ReplaceGlobalStats();
         GameManager.Instance.RestartGame();
         GameManager.Instance.lives -= 10;
         CheckLife();
