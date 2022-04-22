@@ -41,27 +41,17 @@ public class CoinFlipper : MonoBehaviour
         
     }
 
-    public void Fair()
+    public void OnSubmit(bool isCheater = false)
     {
-        if (!cheater)
+        switch (cheater)
         {
-            Win();
-        }
-        else
-        {
-            Lose();
-        }
-    }
-
-    public void Cheater()
-    {
-        if (cheater)
-        {
-            Win();
-        }
-        else
-        {
-            Lose();
+            case true when isCheater:
+            case false when !isCheater:
+                Win();
+                break;
+            default:
+                Lose();
+                break;
         }
     }
     

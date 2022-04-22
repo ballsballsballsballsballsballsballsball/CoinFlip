@@ -14,13 +14,13 @@ public class Buttons : MonoBehaviour
     public void MarkFair()
     {
         CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
-        child.Fair();
+        child.OnSubmit();
     }
 
     public void MarkCheater()
     {
         CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
-        child.Cheater();
+        child.OnSubmit(true);
     }
 
     public void Reset()
