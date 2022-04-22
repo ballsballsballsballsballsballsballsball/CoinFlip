@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject playingParent;
     public GameObject gameOverParent;
     public Text scoreText;
+    public AudioSource audioSource;
     
     public GameObject coinFlipper;
     

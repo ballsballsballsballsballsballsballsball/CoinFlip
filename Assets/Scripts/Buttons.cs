@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Buttons : MonoBehaviour
 {
+    private bool _musicDisabled = true;
     public void FlipCoin()
     {
         CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
@@ -35,6 +36,12 @@ public class Buttons : MonoBehaviour
         GameManager.Instance.ReplaceGlobalStats();
     }
 
+    public void ToggleMusic()
+    {
+        _musicDisabled = !_musicDisabled;
+        GameManager.Instance.audioSource.mute = _musicDisabled;
+    }
+    
     public void Quit()
     {
         Application.Quit();
