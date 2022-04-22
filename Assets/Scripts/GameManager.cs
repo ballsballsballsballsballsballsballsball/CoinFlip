@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     
     public GameObject coinFlipParent;
     public GameObject[] coinFlippers;
+
+    public GameObject playingParent;
+    public GameObject gameOverParent;
+    public Text scoreText;
     
     public GameObject coinFlipper;
     
@@ -34,6 +38,8 @@ public class GameManager : MonoBehaviour
         ReplaceLives();
         ReplaceWinLoss();
         CreateCoinFlipper();
+        gameOverParent.SetActive(false);
+        playingParent.SetActive(true);
     }
 
     void CreateCoinFlipper()
@@ -65,7 +71,30 @@ public class GameManager : MonoBehaviour
         Destroy(coinFlipper);
         CreateCoinFlipper();
     }
-    
+
+    public void GameOver()
+    {
+        playingParent.SetActive(false);
+        gameOverParent.SetActive(true);
+        scoreText.text = $"Your final score was:\n{wins} wins\n{losses} losses";
+    }
+
+    public void Reset()
+    {
+        wins = 0;
+        losses = 0;
+        lives = 100;
+        ReplaceWinLoss();
+        ReplaceLives();
+        heads = 0;
+        tails = 0;
+        ReplaceHeadsTails();
+        Destroy(coinFlipper);
+        CreateCoinFlipper();
+        playingParent.SetActive(true);
+        gameOverParent.SetActive(false);
+    }
+
     // save load
     public void SaveGame()
     {

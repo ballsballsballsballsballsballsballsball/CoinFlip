@@ -22,4 +22,9 @@ public class Buttons : MonoBehaviour
         CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
         child.Cheater();
     }
+
+    public void Reset()
+    {
+        GameManager.Instance.Reset();
+    }
 }

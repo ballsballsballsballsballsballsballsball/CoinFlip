@@ -102,8 +102,7 @@ public class CoinFlipper : MonoBehaviour
         GameManager.Instance.ReplaceLives();
         if (GameManager.Instance.lives <= 0)
         {
-            // TODO: implement game over
-            Debug.Log("Game Over");
+            GameManager.Instance.GameOver();
         }
     }
 }
