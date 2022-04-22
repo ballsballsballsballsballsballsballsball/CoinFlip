@@ -27,4 +27,16 @@ public class Buttons : MonoBehaviour
     {
         GameManager.Instance.Reset();
     }
+
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteAll();
+        GameManager.Instance.LoadGame();
+        GameManager.Instance.ReplaceGlobalStats();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

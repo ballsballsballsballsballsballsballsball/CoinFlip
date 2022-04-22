@@ -113,14 +113,18 @@ public class GameManager : MonoBehaviour
         s += globalWins.ToString() + "|";
         s += globalLosses.ToString();
 
-        Debug.Log(s);
         PlayerPrefs.SetString("SaveState", s);
         PlayerPrefs.Save();
     }
     
     public void LoadGame()
     {
-        if (!PlayerPrefs.HasKey("SaveState")) return;
+        if (!PlayerPrefs.HasKey("SaveState"))
+        {
+            globalWins = 0;
+            globalLosses = 0;
+            return;
+        };
 
         string s = PlayerPrefs.GetString("SaveState");
         string[] data = s.Split('|');
