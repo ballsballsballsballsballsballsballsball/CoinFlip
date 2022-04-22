@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class Buttons : MonoBehaviour
 {
-    private CoinFlipper _child;
-    private void Start()
-    {
-        _child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
-    }
-
     public void FlipCoin()
     {
-        _child.FlipCoin();
+        CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
+        child.FlipCoin();
+    }
+
+    public void MarkFair()
+    {
+        CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
+        child.Fair();
+    }
+
+    public void MarkCheater()
+    {
+        CoinFlipper child = GameManager.Instance.coinFlipParent.transform.GetChild(0).GetComponent<CoinFlipper>();
+        child.Cheater();
     }
 }

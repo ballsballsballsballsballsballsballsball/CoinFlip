@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject coinFlipParent;
     public GameObject[] coinFlippers;
     
+    public GameObject coinFlipper;
+    
     private void Awake()
     {
         SceneManager.sceneLoaded += LoadGame;
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void CreateCoinFlipper()
     {
-        Instantiate(coinFlippers[UnityEngine.Random.Range(0, coinFlippers.Length)], coinFlipParent.transform);
+        coinFlipper = Instantiate(coinFlippers[UnityEngine.Random.Range(0, coinFlippers.Length)], coinFlipParent.transform);
     }
 
     public void ReplaceLives()
@@ -54,6 +56,16 @@ public class GameManager : MonoBehaviour
         winLossText.text = $"Wins: {wins}\n Losses: {losses}";
     }
 
+    public void RestartGame()
+    {
+        coinSideText.text = "No coin";
+        heads = 0;
+        tails = 0;
+        ReplaceHeadsTails();
+        Destroy(coinFlipper);
+        CreateCoinFlipper();
+    }
+    
     // save load
     public void SaveGame()
     {

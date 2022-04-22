@@ -36,8 +36,35 @@ public class CoinFlipper : MonoBehaviour
                 FlipHeads();
             }
         }
+        GameManager.Instance.lives--;
+        CheckLife();
+        
     }
 
+    public void Fair()
+    {
+        if (!cheater)
+        {
+            Win();
+        }
+        else
+        {
+            Lose();
+        }
+    }
+
+    public void Cheater()
+    {
+        if (cheater)
+        {
+            Win();
+        }
+        else
+        {
+            Lose();
+        }
+    }
+    
     private void FlipHeads()
     {
         GameManager.Instance.heads++;
@@ -50,5 +77,33 @@ public class CoinFlipper : MonoBehaviour
         GameManager.Instance.tails++;
         GameManager.Instance.coinSideText.text = "Tails";
         GameManager.Instance.ReplaceHeadsTails();
+    }
+
+    private void Win()
+    {
+        GameManager.Instance.wins++;
+        GameManager.Instance.ReplaceWinLoss();
+        GameManager.Instance.RestartGame();
+        GameManager.Instance.lives += 5;
+        CheckLife();
+    }
+
+    private void Lose()
+    {
+        GameManager.Instance.losses++;
+        GameManager.Instance.ReplaceWinLoss();
+        GameManager.Instance.RestartGame();
+        GameManager.Instance.lives -= 10;
+        CheckLife();
+    }
+
+    private void CheckLife()
+    {
+        GameManager.Instance.ReplaceLives();
+        if (GameManager.Instance.lives <= 0)
+        {
+            // TODO: implement game over
+            Debug.Log("Game Over");
+        }
     }
 }
